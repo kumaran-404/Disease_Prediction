@@ -1,11 +1,15 @@
 import React from 'react'
 import TextField from '@mui/material/TextField'
 import  Button  from '@mui/material/Button'
+import Styles from "../Login/Login.module.css"
+import {NavLink,useNavigate} from "react-router-dom"
+import {SignUpEnd} from "../../api_calls/Auth"
 
 const Signup = () => {
   const email = React.useRef()
   const password  = React.useRef()
   const username  = React.useRef()
+  const navigate = useNavigate()
   const [IsLoading,handleIsLoading] = React.useState(false)
   const [error,handleError] = React.useState({
     'email' :[false ,""],
@@ -47,6 +51,7 @@ const Signup = () => {
         let newpassword = [true,"Weak password(min 8)"]
         return {...prev ,password:newpassword}
       } )
+      return 
     }
     else {
       handleError(prev=>{
@@ -75,8 +80,28 @@ const Signup = () => {
 
     }
 
-    
-    
+    handleIsLoading(true)
+    SignUpEnd({
+      username :username.current.value ,
+      password :password.current.value,
+      email :email.current.value 
+    }).then(response=>{
+      handleIsLoading(false)
+      if(response.message==="success"){
+         navigate("login")
+      }
+      else {
+          if(response.error==="EMAIL_TAKEN"){
+            handleError(prev=>{
+              let newemail = [true,"Email already taken"]
+              return {...prev ,email:newemail}
+            } )
+          }
+          else {
+              console.log("some server err")
+          }
+      }
+    })
 
   
     
@@ -84,9 +109,10 @@ const Signup = () => {
   }
 
   return (
-    <div class={""}>
-
+    <div class={Styles.container}>
+        <img src="/images/logo.jpeg" className="logo" />
         <TextField
+          style={{margin:"10px"}}
           id="email"
           label="Enter Email"
           size="small"
@@ -95,6 +121,7 @@ const Signup = () => {
         />
 
         <TextField
+          style={{margin:"10px"}}
           id="password"
           type="password"
           label="Enter Password"
@@ -104,6 +131,7 @@ const Signup = () => {
         />
 
         <TextField
+          style={{margin:"10px"}}
           id="username"
           label="Enter Name"
           size="small"
@@ -116,9 +144,15 @@ const Signup = () => {
           disableElevation  
           disabled={IsLoading} 
           onClick={Submit}
+          style={{margin:"10px"}}
+          color ="warning"
           >
             {IsLoading?"Loading..":"Signup"}
         </Button>
+
+        <div style={{margin:"10px",alignSelf:"center"}}>
+           Already Have Account? <NavLink to="/login">Login</NavLink>
+        </div>
     </div>
   )
 }

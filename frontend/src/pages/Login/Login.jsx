@@ -2,9 +2,11 @@ import React from 'react'
 import TextField from '@mui/material/TextField'
 import  Button  from '@mui/material/Button'
 import {LoginEnd} from "../../api_calls/Auth"
+import Styles from "./Login.module.css"
+import {NavLink} from "react-router-dom"
 
-const Login = () => {
-
+const Login = ({handleAuth}) => {
+  
   const email = React.useRef()
   const password  = React.useRef()
   const [IsLoading,handleIsLoading] = React.useState(false)
@@ -32,18 +34,37 @@ const Login = () => {
 
     handleError(prev=>{
       let newemail = [false,""]
-      return {...prev ,email:newemail}
+      return {password:[false,""] ,email:newemail}
     } )
+
+    handleIsLoading(true);
     // send to endpoint 
-    LoginEnd({email:email.current.value,password:password.current.value})
+
+    LoginEnd({email:email.current.value,password:password.current.value}).
+    then(res=>{
+        if(res[0]){
+            handleAuth(true)
+        }
+        else {
+          if(res[1] ===1) {
+            const newpassword = [true,"wrong credentials"]
+            const newemail = [true,""]
+            handleError(prev=>{
+              return {email:newemail,password:newpassword}
+            })
+            handleIsLoading(false)
+          }
+        }
+    })
     
    
   }
 
   return (
-    <div class={""}>
-
+    <div class={Styles.container}>
+        <img src="/images/logo.jpeg" className="logo"/>
         <TextField
+          style={{margin:"10px"}}
           id="email"
           label="Enter Email"
           size="small"
@@ -52,6 +73,7 @@ const Login = () => {
         />
 
         <TextField
+          style={{margin:"10px"}}
           id="password"
           type="password"
           label="Enter Password"
@@ -61,6 +83,7 @@ const Login = () => {
         />
 
         <Button 
+          style={{margin:"10px"}}
           variant="contained" 
           disableElevation  
           disabled={IsLoading} 
@@ -68,6 +91,10 @@ const Login = () => {
           >
             {IsLoading?"Loading..":"Login"}
         </Button>
+
+        <div style={{margin:"10px",alignSelf:"center"}}>
+           Join us ! <NavLink to="/signup">Create Account</NavLink>
+        </div>
     </div>
   )
 }

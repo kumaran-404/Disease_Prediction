@@ -23,7 +23,7 @@ class User(APIView):
             new_user.save()
             return Response(data={"message":"success"},status=status.HTTP_201_CREATED)
         except  IntegrityError:
-            return Response(data={"message":"failure","error":"email already taken" },status=status.HTTP_200_OK)
+            return Response(data={"message":"failure","error":"EMAIL_TAKEN" },status=status.HTTP_200_OK)
         except   KeyError :
             return Response(data={"message":"failure","error":"some fields are not provided"},status=status.HTTP_400_BAD_REQUEST)
 
