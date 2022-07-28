@@ -8,6 +8,7 @@ import  Login from './pages/Login/Login'
 import Signup from './pages/Signup/Signup'
 import Predict from './pages/Predict/Predict'
 import Home from './pages/Home/Home'
+import Results from './pages/Predict/Results'
 
 
 const Router = () => {
@@ -63,6 +64,7 @@ const ProtectedRoute =({handleAuth})=>{
         <Router_>
             <Routes>
                 <Route path="predict" element={<Predict/>}></Route>
+                <Route path="predict/results" element={<Results/>}></Route>
                 <Route  path="/" element={<Home handleAuth={handleAuth}/>}></Route>
                 <Route path="/*" element={<Navigate to="/"/>}></Route>
             </Routes>
