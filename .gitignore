@@ -1,3 +1,4 @@
 backend/Pipfile.lock
 backend/Pipfile
 frontend/package-lock.json
+backend/backend/saved_models/model4.joblib
