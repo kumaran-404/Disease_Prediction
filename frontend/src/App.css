@@ -8,3 +8,10 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+
+
+.logo {
+  width : 100px ;
+  height: 100px;
+  align-self: center;
+}

@@ -1,0 +1,66 @@
+.upload_area {
+    width : 30vw ;
+    height :30vw ;
+    
+}
+
+
+.AfterUpload {
+    display:flex ;
+    justify-content :center ;
+    align-items : center ;
+    width :100%;
+    height :100%;
+}
+
+.AfterUpload img {
+    width :90% ;
+    height : 90%;
+}
+
+
+.browse {
+    text-decoration : underline ;
+    color: blue ;
+    cursor : pointer ;
+}
+
+.BeforeUpload {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    border:1px dashed black ;
+    padding:20px ;
+}
+
+.BeforeUpload img {
+    width :300px ;
+    height :300px;
+}
+
+.settings img {
+    width :30px ;
+    height :40px ;
+    opacity :.7 ;
+}
+
+.settings {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.container {
+    display:flex ;
+    flex-direction: column ;
+    position : absolute ;
+    top:50%;
+    left:50%;
+    transform :translate(-50%,-50%)
+}
+
+.container h3 {
+    align-self :center ;
+
+}
