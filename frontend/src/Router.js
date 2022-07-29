@@ -15,13 +15,14 @@ const Router = () => {
 
     const [IsAuthenticated,handleAuth] = useState(null)
     const [IsLoading,handleIsLoading]  = useState(true)
+    const [username,handleUsername] = useState("")    
     
-    useEffect(()=>{
+	useEffect(()=>{
         handleIsLoading(true)
         VerifyTokenEnd(handleAuth).then(res=>{
             handleIsLoading(false)
-            handleAuth(res)
-            
+            handleAuth(res[0])
+            if(res[0]===true) handleUsername(res[1])
         })
     },[])
 
@@ -35,21 +36,21 @@ const Router = () => {
     }
     else {
         if(!IsAuthenticated){
-            return <PublicRoute handleAuth={handleAuth}/>
+            return <PublicRoute  handleUsername ={handleUsername} handleAuth={handleAuth}/>
         }
         else {
-            return <ProtectedRoute  handleAuth={handleAuth}/>
+            return <ProtectedRoute username={username}  handleAuth={handleAuth}/>
         }
     }
 
 }
 
-const PublicRoute =({handleAuth})=>{
+const PublicRoute =({handleAuth,handleUsername})=>{
     
     return(
         <Router_>
             <Routes>
-                <Route path="login"  element={<Login handleAuth={handleAuth}/>}></Route>
+                <Route path="login"  element={<Login handleUsername={handleUsername}  handleAuth={handleAuth}/>}></Route>
                 <Route path="signup" element={<Signup/>}></Route>
                 <Route path="/*" element={<Navigate to="login"/>}></Route>
             </Routes>
@@ -58,14 +59,14 @@ const PublicRoute =({handleAuth})=>{
     )
 }
 
-const ProtectedRoute =({handleAuth})=>{
+const ProtectedRoute =({handleAuth,username})=>{
   
     return (
         <Router_>
             <Routes>
                 <Route path="predict" element={<Predict/>}></Route>
                 <Route path="predict/results" element={<Results/>}></Route>
-                <Route  path="/" element={<Home handleAuth={handleAuth}/>}></Route>
+                <Route  path="/" element={<Home username={username} handleAuth={handleAuth}/>}></Route>
                 <Route path="/*" element={<Navigate to="/"/>}></Route>
             </Routes>
         </Router_>

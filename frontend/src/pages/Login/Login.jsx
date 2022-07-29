@@ -5,7 +5,7 @@ import {LoginEnd} from "../../api_calls/Auth"
 import Styles from "./Login.module.css"
 import {NavLink} from "react-router-dom"
 
-const Login = ({handleAuth}) => {
+const Login = ({handleAuth,handleUsername}) => {
   
   const email = React.useRef()
   const password  = React.useRef()
@@ -40,7 +40,7 @@ const Login = ({handleAuth}) => {
     handleIsLoading(true);
     // send to endpoint 
 
-    LoginEnd({email:email.current.value,password:password.current.value}).
+    LoginEnd({email:email.current.value,password:password.current.value},handleUsername).
     then(res=>{
         if(res[0]){
             handleAuth(true)

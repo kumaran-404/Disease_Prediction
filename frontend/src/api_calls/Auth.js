@@ -1,14 +1,16 @@
 import axios,{AxiosError} from "axios"
-
+import jwt_decode from "jwt-decode"
 
 // get jwt token
-export const LoginEnd = async(data)=>{
+export const LoginEnd = async(data,handleUsername)=>{
     
     try {
         const response = await axios.post("http://localhost:8000/api/token/",data)
         data = await response.data 
         localStorage.setItem("access",data.access)
         localStorage.setItem("refresh",data.refresh)
+	var username = jwt_decode(data.access).name 
+	handleUsername(username)
         return [true] 
     }
     catch(err){
@@ -50,25 +52,26 @@ export async function VerifyTokenEnd(handleAuth){
              const response = await axios.post("http://localhost:8000/api/token/verify/",{
             "token" : localStorage.access 
                 })
-            return true 
+            return [true,jwt_decode(localStorage.access).name] 
         }
         catch(err){
              if(!localStorage.refresh){
                  localStorage.removeItem("access")
-                 return false 
+                 return [false] 
              }
              let resp =true 
              
-             GetRefreshTokenEnd(handleAuth).then(res=>{
-                 
+             GetAccessTokenEnd(handleAuth).then(res=>{
+                 let resp
                  if(res.message==="success"){
                      localStorage.access = res.data.access 
-                     handleAuth(true)
+		     resp= [true,jwt_decode(res.data.access).name]
                  }
                  else {
-                     handleAuth(false)
+                     resp= [false]
                  }
              })
+		return resp
         }
         
 }
@@ -76,7 +79,7 @@ export async function VerifyTokenEnd(handleAuth){
 
 
 // get new refresh token 
-export const GetRefreshTokenEnd = async(handleAuth)=>{
+export const GetAccessTokenEnd = async(handleAuth)=>{
     
        handleAuth(null)
         try {

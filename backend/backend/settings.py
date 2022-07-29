@@ -42,8 +42,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'users',
     'rest_framework_simplejwt',
-    'corsheaders'
-
+    'corsheaders',
 ]
 
 MIDDLEWARE = [
@@ -151,14 +150,11 @@ REST_FRAMEWORK = {
 AUTH_USER_MODEL= "users.CustomUser"
 
 
-CORS_ORIGIN_ALLOW_ALL = False
-CORS_ORIGIN_WHITELIST = (
-  'http://localhost:3000',
-)
+CORS_ORIGIN_ALLOW_ALL = True 
 
 SIMPLE_JWT = {
-    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=60*24),
-    'REFRESH_TOKEN_LIFETIME': timedelta(minutes=60*24*7),
+    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=60*24*7),
+    'REFRESH_TOKEN_LIFETIME': timedelta(minutes=60*24*7*30),
     'ROTATE_REFRESH_TOKENS': False,
     'BLACKLIST_AFTER_ROTATION': False,
     'UPDATE_LAST_LOGIN': False,

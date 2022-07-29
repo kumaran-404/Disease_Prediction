@@ -27,25 +27,32 @@ const Predict = () => {
   }
 
   const DragAndDrop =(ev)=>{
-    ev.preventDefault() 
-    console.log(ev.dataTransfer.files)
-  }
+    console.log("ih")
+  
+    ev.preventDefault()
+    let image=new Image(ev.dataTransfer.getData("text"))
+    var reader = new FileReader()
+    reader.onloadend = ()=>{
+      console.log(reader.result)
+    }
+    reader.readAsDataURL(image)
+    }
 
   const upload =async()=>{
       handleProgress(0)
-      // send as base64
-       axios.post("http://localhost:8000/api/signup/",{"a":"fdf"},{onUploadProgress : (e)=>{
+     
+       const response = await axios.post("http://localhost:8000/<url>",{"image":ImageFile},{onUploadProgress : (e)=>{
         handleProgress(Math.round((100*e.loaded)/e.total))}
-      })
-      // const data = await response.data
-      handleResults({name:"bali"})  // change to data after wards
+      },{ headers :{  Authorization : "Bearer "+localStorage.access }})
+       const data = await response.data
+      handleResults(data)  // change to data after wards
 
   }
 
   return (
     <div className={Styles.container}>
         <h3>Image upload</h3>
-
+        
         <div id="upload-area" className={Styles.upload_area}>
             {
               IsImage? <AfterImageAdded ImageFile={ImageFile} />  : <BeforeImageAdd  DragAndDrop={DragAndDrop} ImageAdded={ImageAdded}/>
@@ -86,7 +93,7 @@ function BeforeImageAdd({ImageAdded,DragAndDrop}){
     }
 
     return(
-      <div class={Styles.BeforeUpload} id="before-upload"  >
+      <div class={Styles.BeforeUpload} id="before-upload"  onDragOver={(event)=>{event.preventDefault();document.getElementById("before-upload").style.border="2px dashed blue";event.dataTransfer.effectAllowed = "all";event.dataTransfer.dropEffect = 'copy';}}  onDragLeave={()=>{document.getElementById("before-upload").style.border="1px dashed black"}} onDrop={DragAndDrop} >
         <img src="/images/up.png"/>
         <input onChange={ImageAdded} style={{display:"none"}} type="file" id="image-file"/>
         <span>Drag and drop or <span className={Styles.browse} onClick={Add} >Browse</span> your files</span>
