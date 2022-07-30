@@ -5,6 +5,7 @@
 	row-gap :1% ;
 	column-gap:10%;	
 	margin:10%;
+	margin-top:5%;
 }
 
 
@@ -23,15 +24,15 @@
 }
 
 .eachStory{
-	transition:transform .25s ease-in-out;
+	transition:transform 1s ease-in-out;
 	position:relative;
 	height :max-content;
+
 }
 
 .eachStory:hover{
 	cursor:pointer ;
 	transform:scale(1.1);
-	
 }
 
 
@@ -49,3 +50,30 @@
 	position :absolute ;
 	bottom:0%;
 }
+
+
+
+.header {
+	font-size:4.5vw;
+	position:relative;
+
+}
+
+.header:after {
+	position:absolute ;
+	bottom:0%;
+	left:0%;
+	content:"";
+	width:50%;
+	height :.5vh;
+	background-color:red;
+
+}
+
+
+.top {
+	height :90vh ;
+	background-color:white;
+
+}
+

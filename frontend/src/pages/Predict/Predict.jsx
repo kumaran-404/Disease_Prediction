@@ -4,7 +4,8 @@ import {Button,LinearProgress} from "@mui/material"
 import axios from "axios"
 import {useNavigate} from "react-router-dom"
 
-const Predict = () => {
+const Predict = ({handleLocation}) => {
+  handleLocation("/predict")
   const [IsImage,handleImage] = React.useState(false)
   const [IsUploading,handleUploading]  = React.useState(false)
   const [ImageFile,handleImageFile] = React.useState(null)
@@ -65,7 +66,7 @@ const Predict = () => {
 
         <Button 
           disableElevation
-          style={{}}
+          style={{alignSelf:"stretch"}}
           variant="contained"
           disabled={!IsImage}
           onClick={ !result?upload:(()=>navigate("/Predict/Results",{state:{result:result}}))}
