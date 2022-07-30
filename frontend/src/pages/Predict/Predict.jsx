@@ -41,10 +41,8 @@ const Predict = ({handleLocation}) => {
 
   const upload =async()=>{
       handleProgress(0)
-     
-       const response = await axios.post("http://localhost:8000/<url>",{"image":ImageFile},{onUploadProgress : (e)=>{
-        handleProgress(Math.round((100*e.loaded)/e.total))}
-      },{ headers :{  Authorization : "Bearer "+localStorage.access }})
+       const tok ="Bearer "+localStorage.access 
+       const response = await axios.post("http://localhost:8000/api/predict/",{"image":ImageFile},{ headers :{  Authorization : tok }})
        const data = await response.data
       handleResults(data)  // change to data after wards
 

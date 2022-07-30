@@ -25,7 +25,8 @@ urlpatterns = [
     path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
     path('api/token/verify/', TokenVerifyView.as_view(), name='token_verify'),
     path('api/signup/',views.User.as_view()),
-    path('api/news/',views.ScrapeData)
+    path('api/news/',views.ScrapeData),
+    path('api/predict/',views.predictData)
 ]
 
 

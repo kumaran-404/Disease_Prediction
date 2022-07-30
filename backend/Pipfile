@@ -9,8 +9,13 @@ django-cors-headers = "*"
 djangorestframework-simplejwt = "*"
 requests = "*"
 bs4 = "*"
+joblib = "*"
+numpy = "*"
 
 [dev-packages]
 
 [requires]
-python_version = "3.8"
+python_version = "3.7"
+
+[packages.50fe6bd]
+file = "https://storage.googleapis.com/tensorflow/mac/cpu/tensorflow-1.8.0-py3-none-any.whl"
