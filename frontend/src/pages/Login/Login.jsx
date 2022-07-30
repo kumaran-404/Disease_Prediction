@@ -5,7 +5,11 @@ import {LoginEnd} from "../../api_calls/Auth"
 import Styles from "./Login.module.css"
 import {NavLink} from "react-router-dom"
 
+<<<<<<< HEAD
 const Login = ({handleAuth}) => {
+=======
+const Login = ({handleAuth,handleUsername}) => {
+>>>>>>> 8c59d67f1ce7dedf2043ae1f00f25f25f0acb68f
   
   const email = React.useRef()
   const password  = React.useRef()
@@ -40,7 +44,11 @@ const Login = ({handleAuth}) => {
     handleIsLoading(true);
     // send to endpoint 
 
+<<<<<<< HEAD
     LoginEnd({email:email.current.value,password:password.current.value}).
+=======
+    LoginEnd({email:email.current.value,password:password.current.value},handleUsername).
+>>>>>>> 8c59d67f1ce7dedf2043ae1f00f25f25f0acb68f
     then(res=>{
         if(res[0]){
             handleAuth(true)

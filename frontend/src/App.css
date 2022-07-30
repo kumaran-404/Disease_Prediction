@@ -7,11 +7,69 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+<<<<<<< HEAD
 }
 
+=======
+  scroll-behaviour:smooth;
+}
+
+.navbar {
+	display:flex ;
+	justify-content:space-between;
+	align-items:center;
+
+}
+
+
+
+.navlinks{
+	width :50%;
+	display:flex ;
+	justify-content:space-around;
+	align-items:center;
+}
+
+.link {
+	text-decoration:none ;
+	color:green ;
+	
+}
+.link:hover {
+	color:black;
+	transform:scale(1.1);
+}
+
+.navbar .logo{
+	margin:3vw;
+}
+>>>>>>> 8c59d67f1ce7dedf2043ae1f00f25f25f0acb68f
 
 .logo {
   width : 100px ;
   height: 100px;
   align-self: center;
+<<<<<<< HEAD
 }
+=======
+}
+
+
+.navbar{
+ 	 min-height : 10vh ;
+  	display:flex;
+	
+}
+
+.active-link{
+	color:white;
+	padding:5px 10px;
+	border-radius:10px;
+	background-color:green;
+}
+
+.active-link:hover {
+	color:white ;
+
+}
+>>>>>>> 8c59d67f1ce7dedf2043ae1f00f25f25f0acb68f

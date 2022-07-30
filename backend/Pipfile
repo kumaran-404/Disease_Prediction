@@ -7,7 +7,12 @@ name = "pypi"
 djangorestframework = "*"
 django-cors-headers = "*"
 djangorestframework-simplejwt = "*"
+<<<<<<< HEAD
 django = "*"
+=======
+requests = "*"
+bs4 = "*"
+>>>>>>> 8c59d67f1ce7dedf2043ae1f00f25f25f0acb68f
 
 [dev-packages]
 

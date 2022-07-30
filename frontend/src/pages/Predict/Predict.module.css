@@ -54,13 +54,23 @@
 .container {
     display:flex ;
     flex-direction: column ;
+<<<<<<< HEAD
     position : absolute ;
     top:50%;
     left:50%;
     transform :translate(-50%,-50%)
+=======
+    align-items:center;   
+    width :max-content;
+    margin:0 auto;
+>>>>>>> 8c59d67f1ce7dedf2043ae1f00f25f25f0acb68f
 }
 
 .container h3 {
     align-self :center ;
 
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> 8c59d67f1ce7dedf2043ae1f00f25f25f0acb68f

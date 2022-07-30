@@ -5,6 +5,9 @@ from .models import CustomUser
 from rest_framework.authentication import TokenAuthentication
 from rest_framework import status
 from django.db import IntegrityError
+import json
+from rest_framework.decorators import api_view 
+import os 
 
 class User(APIView):
     permission_classes = [AllowAny,]
@@ -28,4 +31,8 @@ class User(APIView):
             return Response(data={"message":"failure","error":"some fields are not provided"},status=status.HTTP_400_BAD_REQUEST)
 
         return Response(data={"message":"failure","error":"internal server error"},status=status.HTTP_500_INTERNAL_SERVER_ERROR)
-    
+
+@api_view(['GET'])
+def ScrapeData(request):
+	file = os.path.join(os.path.dirname(__file__),"ScrapData.json")
+	return Response(data=json.load(open(file)))
