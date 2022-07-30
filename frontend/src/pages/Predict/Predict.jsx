@@ -4,7 +4,12 @@ import {Button,LinearProgress} from "@mui/material"
 import axios from "axios"
 import {useNavigate} from "react-router-dom"
 
+<<<<<<< HEAD
 const Predict = () => {
+=======
+const Predict = ({handleLocation}) => {
+  handleLocation("/predict")
+>>>>>>> 8c59d67f1ce7dedf2043ae1f00f25f25f0acb68f
   const [IsImage,handleImage] = React.useState(false)
   const [IsUploading,handleUploading]  = React.useState(false)
   const [ImageFile,handleImageFile] = React.useState(null)
@@ -27,6 +32,7 @@ const Predict = () => {
   }
 
   const DragAndDrop =(ev)=>{
+<<<<<<< HEAD
     ev.preventDefault() 
     console.log(ev.dataTransfer.files)
   }
@@ -39,13 +45,38 @@ const Predict = () => {
       })
       // const data = await response.data
       handleResults({name:"bali"})  // change to data after wards
+=======
+    console.log("ih")
+  
+    ev.preventDefault()
+    let image=new Image(ev.dataTransfer.getData("text"))
+    var reader = new FileReader()
+    reader.onloadend = ()=>{
+      console.log(reader.result)
+    }
+    reader.readAsDataURL(image)
+    }
+
+  const upload =async()=>{
+      handleProgress(0)
+     
+       const response = await axios.post("http://localhost:8000/<url>",{"image":ImageFile},{onUploadProgress : (e)=>{
+        handleProgress(Math.round((100*e.loaded)/e.total))}
+      },{ headers :{  Authorization : "Bearer "+localStorage.access }})
+       const data = await response.data
+      handleResults(data)  // change to data after wards
+>>>>>>> 8c59d67f1ce7dedf2043ae1f00f25f25f0acb68f
 
   }
 
   return (
     <div className={Styles.container}>
         <h3>Image upload</h3>
+<<<<<<< HEAD
 
+=======
+        
+>>>>>>> 8c59d67f1ce7dedf2043ae1f00f25f25f0acb68f
         <div id="upload-area" className={Styles.upload_area}>
             {
               IsImage? <AfterImageAdded ImageFile={ImageFile} />  : <BeforeImageAdd  DragAndDrop={DragAndDrop} ImageAdded={ImageAdded}/>
@@ -58,7 +89,11 @@ const Predict = () => {
 
         <Button 
           disableElevation
+<<<<<<< HEAD
           style={{}}
+=======
+          style={{alignSelf:"stretch"}}
+>>>>>>> 8c59d67f1ce7dedf2043ae1f00f25f25f0acb68f
           variant="contained"
           disabled={!IsImage}
           onClick={ !result?upload:(()=>navigate("/Predict/Results",{state:{result:result}}))}
@@ -86,7 +121,11 @@ function BeforeImageAdd({ImageAdded,DragAndDrop}){
     }
 
     return(
+<<<<<<< HEAD
       <div class={Styles.BeforeUpload} id="before-upload"  >
+=======
+      <div class={Styles.BeforeUpload} id="before-upload"  onDragOver={(event)=>{event.preventDefault();document.getElementById("before-upload").style.border="2px dashed blue";event.dataTransfer.effectAllowed = "all";event.dataTransfer.dropEffect = 'copy';}}  onDragLeave={()=>{document.getElementById("before-upload").style.border="1px dashed black"}} onDrop={DragAndDrop} >
+>>>>>>> 8c59d67f1ce7dedf2043ae1f00f25f25f0acb68f
         <img src="/images/up.png"/>
         <input onChange={ImageAdded} style={{display:"none"}} type="file" id="image-file"/>
         <span>Drag and drop or <span className={Styles.browse} onClick={Add} >Browse</span> your files</span>
@@ -108,4 +147,8 @@ function Settings({name,progress}){
 }
 
 
+<<<<<<< HEAD
 export default Predict
+=======
+export default Predict
+>>>>>>> 8c59d67f1ce7dedf2043ae1f00f25f25f0acb68f
