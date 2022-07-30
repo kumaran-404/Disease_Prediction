@@ -36,3 +36,10 @@ class User(APIView):
 def ScrapeData(request):
 	file = os.path.join(os.path.dirname(__file__),"ScrapData.json")
 	return Response(data=json.load(open(file)))
+
+
+@api_view(['POST'])
+def ScrapeData(request):
+	file = request.data
+    # print(file)
+	return Response(data={"disease":"tungra","links":"1"})
