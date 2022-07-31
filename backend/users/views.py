@@ -13,9 +13,9 @@ from rest_framework.decorators import api_view
 import os
 import numpy as np
 import random
+import joblib
 
-
-
+model = joblib.load('/saved_models/model4.joblib')
 
 
 class User(APIView):
@@ -51,15 +51,15 @@ def ScrapeData(request):
 
 @api_view(['POST'])
 def predictData(request):
-    # image_data = request.data['image']
-    # format, imgstr = image_data.split(';base64,')
-    # print("format", format)
-    # ext = format.split('/')[-1]
+    image_data = request.data['image']
+    format, imgstr = image_data.split(';base64,')
+    print("format", format)
+    ext = format.split('/')[-1]
 
-    # data = ContentFile(base64.b64decode(imgstr))  
-    # file_name = "myphoto." + ext
-    # file_name = default_storage.save(file_name, data)
-    # file_url = default_storage.path(file_name)
+    data = ContentFile(base64.b64decode(imgstr))  
+    file_name = "myphoto." + ext
+    file_name = default_storage.save(file_name, data)
+    file_url = default_storage.path(file_name)
     
     
     val = x = random.randint(0,10)
